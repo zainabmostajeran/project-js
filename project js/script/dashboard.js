@@ -5,7 +5,6 @@ import {
 import { getUserInfo } from "../apis/services/user.service";
 import { errorHandler } from "../libs/errorhandler";
 import { removeSessionToken } from "../libs/session-manager";
-import { SneakersItem } from "./mahsol";
 const listSnekears = document.getElementById("listSnekears");
 const btnBrand = document.getElementById("btnBrand");
 const searchInput = document.getElementById("search-input");
@@ -64,15 +63,15 @@ function generateRowSneakerInfo(sneaker, index) {
    </div>
    </div>`;
 }
-listSnekears.addEventListener("click",function (event){
-  const target=event.target.closest(".product-link");
-  if(target){
-    const card=target.closest(".card");
-    const productId=card.getAttribute("data-id");
-    localStorage.setItem("selectedProductId",productId);
-    window.location.href="/mahsol";
+listSnekears.addEventListener("click", function (event) {
+  const target = event.target.closest(".product-link");
+  if (target) {
+    const card = target.closest(".card");
+    const productId = card.getAttribute("data-id");
+    localStorage.setItem("selectedProductId", productId);
+    window.location.href = "mahsol";
   }
-})
+});
 
 // get brand
 async function fetchBrands() {
@@ -120,17 +119,18 @@ function setupPagination(totalPages) {
   paginationElement.innerHTML = "";
   Array.from({ length: totalPages }, (_, i) => i + 1).forEach((pageNumber) => {
     const span = document.createElement("span");
-    span.classList.add("bgStyle","border", "border-gray-400", "px-3", "py-1");
+    span.classList.add("bgStyle", "border", "border-gray-400", "px-3", "py-1");
     span.innerText = pageNumber;
-    if(pageNumber===currentPage){
-      span.classList.add("bg-red-800","text-white")
+    if (pageNumber === currentPage) {
+      span.classList.add("bg-red-800", "text-white");
     }
-    span.addEventListener("click", function(){
+    span.addEventListener("click", function () {
       changePage(pageNumber);
-      const bgStyle=document.querySelectorAll(".bgStyle")
-      bgStyle.forEach((bgStyleItem)=>
-        bgStyleItem.classList.remove("bg-red-800","text-white"))
-      span.classList.add("bg-red-800","text-white");
+      const bgStyle = document.querySelectorAll(".bgStyle");
+      bgStyle.forEach((bgStyleItem) =>
+        bgStyleItem.classList.remove("bg-red-800", "text-white")
+      );
+      span.classList.add("bg-red-800", "text-white");
     });
     paginationElement.appendChild(span);
   });
