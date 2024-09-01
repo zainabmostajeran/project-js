@@ -22,28 +22,26 @@ export async function SneakersItem(id) {
       ".flex.items-center.gap-1 p"
     ).innerText = `4.3 (5.389 reviews)`;
 
-    // const colors = response.colors.split("|");
-    // const colorContainer = document.querySelector(
-    //   ".flex.items-start.w-44.overflow-x-auto"
-    // );
-    // colorContainer.innerHTML = colors
-    //   .map((color) => (
-    //     <button
-    //       class="rounded-full border p-4"
-    //       style="background-color: ${response.color};"
-    //     ></button>
-    //   ))
-    //   .join("");
+    const colors = response.colors.split("|");
+    const colorContainer = document.querySelector(
+      ".flex.items-start.w-44.overflow-x-auto"
+    );
+    colorContainer.innerHTML = colors
+      .map((color) => {
+        return `<button
+          class="rounded-full border border-gray-600 p-4"
+          style="background-color: ${color};"
+        ></button>`;
+      })
+      .join("");
 
-    // const sizes = response.sizes.split("|");
-    // const sizeContainer = document.querySelector(".flex.gap-2.items-start");
-    // sizeContainer.innerHTML = sizes
-    //   .map((size) => (
-    //     <button class="rounded-full border border-gray-600 px-2 py-1">
-    //       ${size}
-    //     </button>
-    //   ))
-    //   .join("");
+    const sizes = response.sizes.split("|");
+    const sizeContainer = document.querySelector(".flex.gap-2.items-start");
+    sizeContainer.innerHTML = sizes
+      .map((size) => {
+        return ` <button class="rounded-full border border-gray-600 px-2 py-1">${size}</button>`;
+      })
+      .join("");
   } catch (error) {
     errorHandler(error);
     console.log(error);
