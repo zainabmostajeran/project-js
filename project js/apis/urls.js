@@ -3,9 +3,10 @@ export const urls = {
     login: "/auth/login",
     signup: "/auth/signup",
   },
-  user: "/user",
+  user:"/user",
   sneaker: {
     new: "/sneaker",
     brands: "/sneaker/brands",
+    item:"/sneaker/item"
   },
 };

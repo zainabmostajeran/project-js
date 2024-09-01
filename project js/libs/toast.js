@@ -1,6 +1,6 @@
 import Toastify from "toastify-js";
 
-export function toast(text , mode = "default") {
+export function toast(text , mode = "error") {
   Toastify({
     text,
     duration: 3000,

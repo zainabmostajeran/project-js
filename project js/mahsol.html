@@ -28,17 +28,17 @@
           </div>
         </div>
         <hr />
-        <div class="flex flex-col gap-5">
+        <div class="flex flex-col gap-3">
           <p class="font-semibold text-lg">Description</p>
-          <p class="text-gray-800">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit quod in
-            quisquam, laborum tempora eligendi dolores iusto enim dicta
+          <p class="text-gray-800 overflow-y-hidden max-h-11">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit quod in 
+            quisquam, laborum  eligendi <a class="font-bold" href="#">view more...</a> dolores iusto enim dicta
             voluptates maxime vitae, ea nesciunt molestias quibusdam eum ipsum.
             Accusamus, cumque!
           </p>
-          <div class="flex items-center justify-center gap-8">
-            <div class="flex flex-col gap-5">
-              <p class="font-semibold">size</p>
+          <div class="flex items-center justify-between gap-8">
+            <div class="flex flex-col gap-2">
+              <p class="font-bold">size</p>
               <div class="flex gap-2 items-start">
                 <button class="rounded-full border  border-gray-600 px-2 py-1">40</button
                 ><button class="rounded-full border border-gray-600 px-2 py-1">41</button
@@ -46,7 +46,7 @@
               </div>
             </div>
             <div class="flex flex-col gap-2 ">
-              <p class="font-semibold">color</p>
+              <p class="font-bold">color</p>
               <div class="flex gap-2 items-start w-44 overflow-x-auto">
                 <button class="rounded-full border p-4 bg-slate-300"></button
                 ><button class="rounded-full border p-4 bg-slate-900"></button
@@ -59,9 +59,9 @@
           <div class="flex items-center gap-5">
             <p class="font-semibold">Quantity</p>
             <div class="bg-gray-300 flex items-center justify-center rounded-full gap-5 px-7 py-2">
-              <p class="font-semibold text-xl">-</p>
-              <p class="font-semibold text-xl">2</p>
-              <p class="font-semibold text-xl">+</p>
+              <p class="font-semibold text-xl" data-action="decrease">-</p>
+              <p class="font-semibold text-xl" id="quantity">0</p>
+              <p class="font-semibold text-xl" data-action="increase">+</p>
             </div>
           </div>
         </div>
@@ -69,7 +69,7 @@
         <div class="flex items-center gap-5">
           <div class="flex flex-col items-center gap-1">
             <p class="text-gray-500">Total price</p>
-            <p class="font-bold">$343567</p>
+            <p class="font-bold" id="totalPrice">$</p>
           </div>
           <button class="bg-black rounded-full w-52 py-2 text-white">
             Add to cart

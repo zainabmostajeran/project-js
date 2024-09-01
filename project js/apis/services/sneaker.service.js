@@ -21,3 +21,7 @@ export async function getSneakersBrand() {
   const response = await httpClient().get(urls.sneaker.brands);
   return response.data;
 }
+export async function getSneakersItem(id) {
+  const response = await httpClient().get(urls.sneaker.item + `${id}`);
+  return response.data;
+}

@@ -7,9 +7,8 @@ import { errorHandler } from "../libs/errorhandler";
 import { removeSessionToken } from "../libs/session-manager";
 const listSnekears = document.getElementById("listSnekears");
 const btnBrand = document.getElementById("btnBrand");
-const searchInput=document.getElementById("search-input")
+const searchInput = document.getElementById("search-input");
 const paginationElement = document.getElementById("pagination");
-
 
 let currentPage = 1;
 let itemsPerPage = 10;
@@ -46,11 +45,12 @@ async function fetchSneakerInfo() {
   }
 }
 fetchSneakerInfo();
+
 function renderSneakers(sneakers) {
   let render = sneakers.map((el, index) => generateRowSneakerInfo(el, index));
   listSnekears.innerHTML = render.join("");
 }
-// render sneakersInfo
+// generate sneakersInfo
 function generateRowSneakerInfo(sneaker, index) {
   return `
   <div class="card flex flex-col gap-2 items-center justify-start" data-index="${index}">
@@ -92,26 +92,33 @@ function generateBrand(brand, index) {
 function handleBrandFilter() {
   btnBrand.addEventListener("click", (event) => {
     const filter = event.target.dataset.filter;
-    if(filter){
-      const brandButtons=btnBrand.querySelectorAll(".filter")
-      brandButtons.forEach((button)=>{
-        button.classList.remove("text-white","bg-gray-800")
-      })
-      event.target.classList.add("text-white","bg-gray-800")
+    if (filter) {
+      const brandButtons = btnBrand.querySelectorAll(".filter");
+      brandButtons.forEach((button) => {
+        button.classList.remove("text-white", "bg-gray-800");
+      });
+      event.target.classList.add("text-white", "bg-gray-800");
       selectedBrands = filter === "All" ? [] : [filter];
-       currentPage = 1;
+      currentPage = 1;
       fetchSneakerInfo();
     }
   });
 }
-pagination
+// pagination
 function setupPagination(totalPages) {
   paginationElement.innerHTML = "";
   Array.from({ length: totalPages }, (_, i) => i + 1).forEach((pageNumber) => {
     const span = document.createElement("span");
-    span.classList.add("border","border-gray-400","px-3","py-1")
+    span.classList.add("bgStyle","border", "border-gray-400", "px-3", "py-1");
     span.innerText = pageNumber;
-    span.addEventListener("click", () => changePage(pageNumber));
+
+    span.addEventListener("click", function(){
+      changePage(pageNumber);
+      const bgStyle=document.querySelectorAll(".bgStyle")
+      bgStyle.forEach((bgStyleItem)=>
+        bgStyleItem.classList.remove("bg-red-800","text-white"))
+      this.classList.add("bg-red-800","text-white");
+    });
     paginationElement.appendChild(span);
   });
 }
@@ -120,11 +127,12 @@ function changePage(page) {
   fetchSneakerInfo();
 }
 //search
-searchInput.addEventListener("input",()=>{
+searchInput.addEventListener("input", () => {
   currentSearch = searchInput.value.trim();
   currentPage = 1;
   fetchSneakerInfo();
-})
+  // window.location.href="/search"
+});
 //say hello
 let sayHello = document.getElementById("sayHello");
 const greeting = ["Good Morning", "Good Afternoon", "Good Evening"];
