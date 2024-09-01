@@ -46,24 +46,16 @@ async function fetchSneakerInfo() {
   }
 }
 fetchSneakerInfo();
-// function clickImg (sneakers) {
-//   sneakers.forEach((sneaker)=>{
-//       sneaker.addEventListener("click",()=>{
-//         SneakersItem(sneaker.id);
-//       })
-//     })
-// }
-
+//render
 function renderSneakers(sneakers) {
   let render = sneakers.map((el, index) => generateRowSneakerInfo(el, index));
   listSnekears.innerHTML = render.join("");
-  // clickImg(sneakers);
 }
 // generate sneakersInfo
 function generateRowSneakerInfo(sneaker, index) {
   return `
-  <div class="card flex flex-col gap-2 items-center justify-start" data-index="${index}">
-    <a href="http://localhost:5173/mahsol/${sneaker.id}" class="rounded-2xl w-40 h-40  overflow-hidden">
+  <div class="card flex flex-col gap-2 items-center justify-start" data-index="${index}" data-id="${sneaker.id}">
+    <a href="http://localhost:5173/mahsol/${sneaker.id}" class="rounded-2xl w-40 h-40  overflow-hidden product-link">
     <img  src="${sneaker.imageURL}" alt="sneakerImage"> 
     </a>
     <div class="flex flex-col gap-2  px-2 items-start justify-center">
@@ -72,6 +64,16 @@ function generateRowSneakerInfo(sneaker, index) {
    </div>
    </div>`;
 }
+listSnekears.addEventListener("click",function (event){
+  const target=event.target.closest(".product-link");
+  if(target){
+    const card=target.closest(".card");
+    const productId=card.getAttribute("data-id");
+    localStorage.setItem("selectedProductId",productId);
+    window.location.href="/mahsol";
+  }
+})
+
 // get brand
 async function fetchBrands() {
   try {
@@ -142,7 +144,6 @@ searchInput.addEventListener("input", () => {
   currentSearch = searchInput.value.trim();
   currentPage = 1;
   fetchSneakerInfo();
-  // window.location.href="/search"
 });
 //say hello
 let sayHello = document.getElementById("sayHello");
