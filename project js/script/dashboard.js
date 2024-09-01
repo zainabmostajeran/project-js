@@ -5,6 +5,7 @@ import {
 import { getUserInfo } from "../apis/services/user.service";
 import { errorHandler } from "../libs/errorhandler";
 import { removeSessionToken } from "../libs/session-manager";
+import { SneakersItem } from "./mahsol";
 const listSnekears = document.getElementById("listSnekears");
 const btnBrand = document.getElementById("btnBrand");
 const searchInput = document.getElementById("search-input");
@@ -45,17 +46,25 @@ async function fetchSneakerInfo() {
   }
 }
 fetchSneakerInfo();
+// function clickImg (sneakers) {
+//   sneakers.forEach((sneaker)=>{
+//       sneaker.addEventListener("click",()=>{
+//         SneakersItem(sneaker.id);
+//       })
+//     })
+// }
 
 function renderSneakers(sneakers) {
   let render = sneakers.map((el, index) => generateRowSneakerInfo(el, index));
   listSnekears.innerHTML = render.join("");
+  // clickImg(sneakers);
 }
 // generate sneakersInfo
 function generateRowSneakerInfo(sneaker, index) {
   return `
   <div class="card flex flex-col gap-2 items-center justify-start" data-index="${index}">
-    <a href="#" class="rounded-2xl w-40 h-40  overflow-hidden">
-    <img  src="${sneaker.imageURL}"> 
+    <a href="http://localhost:5173/mahsol/${sneaker.id}" class="rounded-2xl w-40 h-40  overflow-hidden">
+    <img  src="${sneaker.imageURL}" alt="sneakerImage"> 
     </a>
     <div class="flex flex-col gap-2  px-2 items-start justify-center">
    <p class="font-bold max-w-40 text-nowrap overflow-hidden text-lg">${sneaker.name}...</p>
@@ -72,7 +81,7 @@ async function fetchBrands() {
       return generateBrand(el, index);
     });
     btnBrand.innerHTML =
-      `<button class="filter border border-black rounded-full px-7 py-1 font-semibold text-base" data-filter="All">All</button>` +
+      `<button class="filter border border-black rounded-full px-7 text-white bg-gray-800 py-1 font-semibold text-base" data-filter="All">All</button>` +
       renderBrand.join("");
     handleBrandFilter();
   } catch (error) {
@@ -84,7 +93,7 @@ fetchBrands();
 // generateBrand
 function generateBrand(brand, index) {
   return `<button
-  class="filter border border-5 border-black  rounded-full px-5 py-1 font-bold text-base " data-index="${index}"
+  class="filter border border-5 border-black text-nowrap max-w-72 h-14 rounded-full px-5 py-1 font-bold text-base " data-index="${index}"
   data-filter="${brand}">${brand}
   </button>`;
 }
@@ -111,13 +120,15 @@ function setupPagination(totalPages) {
     const span = document.createElement("span");
     span.classList.add("bgStyle","border", "border-gray-400", "px-3", "py-1");
     span.innerText = pageNumber;
-
+    if(pageNumber===currentPage){
+      span.classList.add("bg-red-800","text-white")
+    }
     span.addEventListener("click", function(){
       changePage(pageNumber);
       const bgStyle=document.querySelectorAll(".bgStyle")
       bgStyle.forEach((bgStyleItem)=>
         bgStyleItem.classList.remove("bg-red-800","text-white"))
-      this.classList.add("bg-red-800","text-white");
+      span.classList.add("bg-red-800","text-white");
     });
     paginationElement.appendChild(span);
   });
