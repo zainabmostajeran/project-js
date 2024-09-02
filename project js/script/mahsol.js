@@ -47,7 +47,7 @@ export async function SneakersItem(id) {
       })
       .join("");
     //////////////////////////////////////////////////////////////
-    price=response.price;
+    price = response.price;
     document
       .querySelector('[data-action="increase"]')
       .addEventListener("click", () => updateQuantity(1));
@@ -62,6 +62,9 @@ export async function SneakersItem(id) {
 function updateQuantity(change) {
   quantity = Math.max(0, quantity + change);
   document.querySelector("#quantity").innerText = quantity;
+  document.querySelector("#totalPrice").innerText = `$${
+    price * quantity
+  }.00`;
 }
 const selectedProductId = localStorage.getItem("selectedProductId");
 if (selectedProductId) {
