@@ -1,6 +1,8 @@
 import { getSneakersItem } from "../apis/services/sneaker.service";
 import { errorHandler } from "../libs/errorhandler";
-const itemInfo = document.getElementById("itemInfo");
+
+let quantity = 0;
+let price = 0;
 
 //get item
 export async function SneakersItem(id) {
@@ -11,10 +13,12 @@ export async function SneakersItem(id) {
 
     document.querySelector(".font-bold.text-xl").innerText = response.category;
 
-    document.querySelector("#totalPrice").innerText = `$${response.price}.00`;
+    // document.querySelector("#totalPrice").innerText = `$${(
+    //   price * quantity
+    // ).toFixed(2)}`;
 
     document.querySelector(
-      ".bg-gray-300.p-1.rounded-lg.text-sm"
+      ".bg-gray-300.p-2.rounded-lg.text-sm"
     ).innerText = `5.371 sold`;
 
     document.querySelector(".w-4.h-4").src = "img/star-outline.svg";
@@ -42,32 +46,24 @@ export async function SneakersItem(id) {
         return ` <button class="rounded-full border border-gray-600 px-2 py-1">${size}</button>`;
       })
       .join("");
+    //////////////////////////////////////////////////////////////
+    price=response.price;
+    document
+      .querySelector('[data-action="increase"]')
+      .addEventListener("click", () => updateQuantity(1));
+    document
+      .querySelector('[data-action="decrease"]')
+      .addEventListener("click", () => updateQuantity(-1));
   } catch (error) {
     errorHandler(error);
     console.log(error);
   }
 }
-
+function updateQuantity(change) {
+  quantity = Math.max(0, quantity + change);
+  document.querySelector("#quantity").innerText = quantity;
+}
 const selectedProductId = localStorage.getItem("selectedProductId");
 if (selectedProductId) {
   SneakersItem(selectedProductId);
 }
-
-// let catchElement = document.getElementById("catch");
-// catchElement.addEventListener("click", (event) => {
-//   let action = event.target.getAttribute("data-action");
-//   let total= event.target.closest(".total")
-//   if(action && total){
-//     let quantityElement = document.getElementById("quantity");
-//     let quantity = parseInt(quantityElement.innerText);
-//     if (action === "increase") {
-//       quantity++;
-//     } else if (action === "decrease" && quantity > 0) {
-//       quantity--;
-//     }
-//   }
-// });
-
-//  const action =document.getAttribute("data-action");
-// const quantityElement=document.getElementById("quantity");
-// const quantity = parseInt(quantityElement.innerText);

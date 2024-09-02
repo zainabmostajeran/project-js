@@ -63,6 +63,7 @@ function generateRowSneakerInfo(sneaker, index) {
    </div>
    </div>`;
 }
+
 listSnekears.addEventListener("click", function (event) {
   const target = event.target.closest(".product-link");
   if (target) {
@@ -152,7 +153,6 @@ function debounce(func, delay) {
     }, delay);
   };
 }
-
 const debouncedSearch = debounce(() => {
   currentSearch = searchInput.value.trim();
   currentPage = 1;
