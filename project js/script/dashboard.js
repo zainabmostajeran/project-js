@@ -54,7 +54,7 @@ function renderSneakers(sneakers) {
 function generateRowSneakerInfo(sneaker, index) {
   return `
   <div class="card flex flex-col gap-2 items-center justify-start" data-index="${index}" data-id="${sneaker.id}">
-    <a href="http://localhost:5173/mahsol/${sneaker.id}" class="rounded-2xl w-40 h-40  overflow-hidden product-link">
+    <a href="#" class="rounded-2xl w-40 h-40  overflow-hidden product-link">
     <img  src="${sneaker.imageURL}" alt="sneakerImage"> 
     </a>
     <div class="flex flex-col gap-2  px-2 items-start justify-center">
@@ -140,11 +140,26 @@ function changePage(page) {
   fetchSneakerInfo();
 }
 //search
-searchInput.addEventListener("input", () => {
+
+function debounce(func, delay) {
+  let timeoutId;
+  return function (...args) {
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+    timeoutId = setTimeout(() => {
+      func.apply(this, args);
+    }, delay);
+  };
+}
+
+const debouncedSearch = debounce(() => {
   currentSearch = searchInput.value.trim();
   currentPage = 1;
   fetchSneakerInfo();
-});
+}, 1500);
+
+searchInput.addEventListener("input", debouncedSearch);
 //say hello
 let sayHello = document.getElementById("sayHello");
 const greeting = ["Good Morning", "Good Afternoon", "Good Evening"];

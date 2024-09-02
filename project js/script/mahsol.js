@@ -53,16 +53,21 @@ if (selectedProductId) {
   SneakersItem(selectedProductId);
 }
 
-//  const catchElement= document.getElementById("catch");
-//  catchElement.addEventListener("click", (event) => {
-//   const action =event.target.getAttribute("data-action");
-//   const quantityElement=document.getElementById("quantity")
-//  const quantity = parseInt(quantityElement.innerText);
-//  const totalPrice = document.getElementById("totalPrice");
-//   if (action === "increase") {
-//     quantity++;
-//   } else if (action === "decrease" && quantity > 0) {
-//     quantity--;
+// let catchElement = document.getElementById("catch");
+// catchElement.addEventListener("click", (event) => {
+//   let action = event.target.getAttribute("data-action");
+//   let total= event.target.closest(".total")
+//   if(action && total){
+//     let quantityElement = document.getElementById("quantity");
+//     let quantity = parseInt(quantityElement.innerText);
+//     if (action === "increase") {
+//       quantity++;
+//     } else if (action === "decrease" && quantity > 0) {
+//       quantity--;
+//     }
 //   }
-//   totalPrice=quantity;
-// })
+// });
+
+//  const action =document.getAttribute("data-action");
+// const quantityElement=document.getElementById("quantity");
+// const quantity = parseInt(quantityElement.innerText);
