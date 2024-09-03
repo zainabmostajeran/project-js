@@ -36,8 +36,14 @@ async function fetchSneakerInfo() {
       brands: selectedBrands,
     };
     const response = await getSneakers(params);
-    renderSneakers(response.data);
-    setupPagination(response.totalPages);
+    if (response.data.length === 0) {
+      listSnekears.classList.remove("grid")
+      listSnekears.innerHTML =
+        '<div class="flex flex-col items-center text-center "><img class="w-full" src="img/notfound.png"><p class="font-bold text-xl">Not found</p><p>sorry the keyword your entered cannot be found.</p></div>'
+    } else {
+      renderSneakers(response.data);
+      setupPagination(response.totalPages);
+    }
     console.log(response);
   } catch (error) {
     errorHandler(error);
@@ -73,7 +79,6 @@ listSnekears.addEventListener("click", function (event) {
     window.location.href = "mahsol";
   }
 });
-
 // get brand
 async function fetchBrands() {
   try {
@@ -141,7 +146,6 @@ function changePage(page) {
   fetchSneakerInfo();
 }
 //search
-
 function debounce(func, delay) {
   let timeoutId;
   return function (...args) {

@@ -62,9 +62,7 @@ export async function SneakersItem(id) {
 function updateQuantity(change) {
   quantity = Math.max(0, quantity + change);
   document.querySelector("#quantity").innerText = quantity;
-  document.querySelector("#totalPrice").innerText = `$${
-    price * quantity
-  }.00`;
+  document.querySelector("#totalPrice").innerText = `$${price * quantity}.00`;
 }
 const selectedProductId = localStorage.getItem("selectedProductId");
 if (selectedProductId) {
