@@ -40,7 +40,9 @@ async function fetchSneakerInfo() {
       listSnekears.classList.remove("grid")
       listSnekears.innerHTML =
         '<div class="flex flex-col items-center text-center "><img class="w-full" src="img/notfound.png"><p class="font-bold text-xl">Not found</p><p>sorry the keyword your entered cannot be found.</p></div>'
+
     } else {
+      listSnekears.classList.add("grid")
       renderSneakers(response.data);
       setupPagination(response.totalPages);
     }
@@ -75,8 +77,8 @@ listSnekears.addEventListener("click", function (event) {
   if (target) {
     const card = target.closest(".card");
     const productId = card.getAttribute("data-id");
-    localStorage.setItem("selectedProductId", productId);
-    window.location.href = "mahsol";
+    // localStorage.setItem("selectedProductId", productId);
+    window.location.href = `/mahsol?id=${productId}`;
   }
 });
 // get brand
